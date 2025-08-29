@@ -7,8 +7,9 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"terraform-mcp-server/pkg/utils"
 	"time"
+
+	"github.com/Yunsang-Jeong/terraform-mcp-server/pkg/utils"
 )
 
 const (

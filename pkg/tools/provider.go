@@ -2,7 +2,8 @@ package tools
 
 import (
 	"context"
-	"terraform-mcp-server/pkg/utils/registry"
+
+	"github.com/Yunsang-Jeong/terraform-mcp-server/pkg/utils/registry"
 
 	"github.com/mark3labs/mcp-go/mcp"
 )

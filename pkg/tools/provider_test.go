@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"terraform-mcp-server/pkg/tools"
+	"github.com/Yunsang-Jeong/terraform-mcp-server/pkg/tools"
 
 	"github.com/mark3labs/mcp-go/mcp"
 )
@@ -36,6 +36,8 @@ func TestGetResourceBlockDocument_Success(t *testing.T) {
 	if len(result.Content) == 0 {
 		t.Error("Expected non-empty content")
 	}
+
+	t.Logf("Resource block document content: %+v", result.Content)
 }
 
 func TestGetDataBlockDocument_Success(t *testing.T) {
@@ -65,6 +67,8 @@ func TestGetDataBlockDocument_Success(t *testing.T) {
 	if len(result.Content) == 0 {
 		t.Error("Expected non-empty content")
 	}
+
+	t.Logf("Data block document content: %+v", result.Content)
 }
 
 func TestGetResourceBlockDocument_WithCustomNamespace(t *testing.T) {
@@ -115,6 +119,8 @@ func TestGetResourceBlockDocument_WithVersion(t *testing.T) {
 	if len(result.Content) == 0 {
 		t.Error("Expected non-empty content")
 	}
+
+	t.Logf("Resource block document with version content: %+v", result.Content)
 }
 
 func TestGetResourceBlockDocument_MissingProviderName(t *testing.T) {
@@ -211,6 +217,8 @@ func TestGetDataBlockDocument_WithVersion(t *testing.T) {
 	if len(result.Content) == 0 {
 		t.Error("Expected non-empty content")
 	}
+
+	t.Logf("Data block document with version content: %+v", result.Content)
 }
 
 func TestGetDataBlockDocument_MissingProviderName(t *testing.T) {
