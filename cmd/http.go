@@ -13,8 +13,8 @@ var (
 var httpCmd = &cobra.Command{
 	Use:   "http",
 	Short: "Run mcp http server",
-	Run: func(cmd *cobra.Command, args []string) {
-		server.RunHttp(port)
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return server.RunHttp(port)
 	},
 }
 

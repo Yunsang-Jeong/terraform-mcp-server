@@ -8,22 +8,8 @@ import (
 	"github.com/Yunsang-Jeong/terraform-mcp-server/pkg/tools"
 	"github.com/Yunsang-Jeong/terraform-mcp-server/version"
 
-	"github.com/charmbracelet/lipgloss/v2"
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
-)
-
-// Styles for pretty output
-var (
-	titleStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("4"))   // Blue
-	modeStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("6"))              // Cyan
-	keyStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("8"))              // Gray
-	valueStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("2"))              // Green
-	protoStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("3"))              // Yellow
-	urlStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("5"))              // Magenta
-	toolStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("7")).Faint(true) // Dim
-	okStyle    = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("2"))   // Green bold
-	errStyle   = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("1"))   // Red bold
 )
 
 // createMCPServer creates and configures the MCP server with all tools
@@ -88,75 +74,26 @@ func createMCPServer() *server.MCPServer {
 }
 
 // RunHttp starts the MCP server over HTTP
-func RunHttp(port uint16) {
+func RunHttp(port uint16) error {
 	s := createMCPServer()
 	addr := fmt.Sprintf(":%d", port)
 
-	fmt.Printf("Starting %s (%s)\n", 
-		titleStyle.Render("Terraform MCP Server"), 
-		modeStyle.Render("HTTP mode"))
-	
-	fmt.Printf("%s: %s\n", 
-		keyStyle.Render("Server"), 
-		valueStyle.Render(fmt.Sprintf("Terraform MCP Server v%s", version.Version)))
-	
-	fmt.Printf("%s: %s\n", 
-		keyStyle.Render("Protocol"), 
-		protoStyle.Render("HTTP"))
-	
-	fmt.Printf("%s: %s\n", 
-		keyStyle.Render("Listening on"), 
-		urlStyle.Render(fmt.Sprintf("http://localhost%s", addr)))
-	
-	fmt.Printf("%s: %s\n", 
-		keyStyle.Render("Available tools"), 
-		valueStyle.Render("3 tools"))
-	
-	fmt.Printf("  %s\n", toolStyle.Render("search_resource_block_document"))
-	fmt.Printf("  %s\n", toolStyle.Render("search_data_block_document"))
-	fmt.Printf("  %s\n", toolStyle.Render("get_module"))
-	
-	fmt.Printf("%s\n\n", okStyle.Render("Server ready to accept connections!"))
-
 	if err := server.NewStreamableHTTPServer(s).Start(addr); err != nil {
-		fmt.Printf("%s: %s\n", errStyle.Render("Server error"), errStyle.Render(err.Error()))
+		return err
 	}
+
+	return nil
 }
 
 // RunStdio starts the MCP server over stdio
-func RunStdio() {
+func RunStdio() error {
 	s := createMCPServer()
 	stdioServer := server.NewStdioServer(s)
 	ctx := context.Background()
 
-	// stderr로 로깅 (stdout은 MCP 통신용)
-	fmt.Fprintf(os.Stderr, "Starting %s (%s)\n", 
-		titleStyle.Render("Terraform MCP Server"), 
-		modeStyle.Render("stdio mode"))
-	
-	fmt.Fprintf(os.Stderr, "%s: %s\n", 
-		keyStyle.Render("Server"), 
-		valueStyle.Render(fmt.Sprintf("Terraform MCP Server v%s", version.Version)))
-	
-	fmt.Fprintf(os.Stderr, "%s: %s\n", 
-		keyStyle.Render("Protocol"), 
-		protoStyle.Render("JSON-RPC over stdio"))
-	
-	fmt.Fprintf(os.Stderr, "%s: %s\n", 
-		keyStyle.Render("Communication"), 
-		urlStyle.Render("stdin/stdout"))
-	
-	fmt.Fprintf(os.Stderr, "%s: %s\n", 
-		keyStyle.Render("Available tools"), 
-		valueStyle.Render("3 tools"))
-	
-	fmt.Fprintf(os.Stderr, "  %s\n", toolStyle.Render("search_resource_block_document"))
-	fmt.Fprintf(os.Stderr, "  %s\n", toolStyle.Render("search_data_block_document"))
-	fmt.Fprintf(os.Stderr, "  %s\n", toolStyle.Render("get_module"))
-	
-	fmt.Fprintf(os.Stderr, "%s\n\n", okStyle.Render("Server ready to accept JSON-RPC messages!"))
-
 	if err := stdioServer.Listen(ctx, os.Stdin, os.Stdout); err != nil {
-		fmt.Fprintf(os.Stderr, "%s: %s\n", errStyle.Render("Server error"), errStyle.Render(err.Error()))
+		return err
 	}
+
+	return nil
 }

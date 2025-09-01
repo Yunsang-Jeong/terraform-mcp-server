@@ -11,8 +11,8 @@ var stdioCmd = &cobra.Command{
 	Long: `Run the Terraform MCP server over stdio for direct communication.
 This mode is typically used when the server is invoked by an MCP client
 that communicates via standard input and output streams.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		server.RunStdio()
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return server.RunStdio()
 	},
 }
 
