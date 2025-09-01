@@ -5,9 +5,8 @@ go 1.24.1
 require (
 	github.com/Yunsang-Jeong/terraform-config-parser v0.0.1
 	github.com/charmbracelet/fang v0.4.0
-	github.com/charmbracelet/lipgloss/v2 v2.0.0-beta1
 	github.com/mark3labs/mcp-go v0.38.0
-	github.com/spf13/cobra v1.9.1
+	github.com/spf13/cobra v1.10.0
 )
 
 require (
@@ -19,6 +18,7 @@ require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/charmbracelet/colorprofile v0.3.2 // indirect
+	github.com/charmbracelet/lipgloss/v2 v2.0.0-beta1 // indirect
 	github.com/charmbracelet/x/ansi v0.10.1 // indirect
 	github.com/charmbracelet/x/cellbuf v0.0.13 // indirect
 	github.com/charmbracelet/x/exp/charmtone v0.0.0-20250829135019-44e44e21330d // indirect
