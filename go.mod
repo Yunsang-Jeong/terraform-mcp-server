@@ -5,8 +5,8 @@ go 1.24.1
 require (
 	github.com/Yunsang-Jeong/terraform-config-parser v0.0.1
 	github.com/charmbracelet/fang v0.4.0
-	github.com/mark3labs/mcp-go v0.38.0
-	github.com/spf13/cobra v1.10.0
+	github.com/mark3labs/mcp-go v0.39.1
+	github.com/spf13/cobra v1.10.1
 )
 
 require (
@@ -21,8 +21,8 @@ require (
 	github.com/charmbracelet/lipgloss/v2 v2.0.0-beta1 // indirect
 	github.com/charmbracelet/x/ansi v0.10.1 // indirect
 	github.com/charmbracelet/x/cellbuf v0.0.13 // indirect
-	github.com/charmbracelet/x/exp/charmtone v0.0.0-20250829135019-44e44e21330d // indirect
-	github.com/charmbracelet/x/exp/color v0.0.0-20250829135019-44e44e21330d // indirect
+	github.com/charmbracelet/x/exp/charmtone v0.0.0-20250902204034-1cdc10c66d5b // indirect
+	github.com/charmbracelet/x/exp/color v0.0.0-20250902204034-1cdc10c66d5b // indirect
 	github.com/charmbracelet/x/term v0.2.1 // indirect
 	github.com/cloudflare/circl v1.6.1 // indirect
 	github.com/cyphar/filepath-securejoin v0.4.1 // indirect
@@ -52,7 +52,7 @@ require (
 	github.com/skeema/knownhosts v1.3.1 // indirect
 	github.com/spf13/afero v1.14.0 // indirect
 	github.com/spf13/cast v1.9.2 // indirect
-	github.com/spf13/pflag v1.0.9 // indirect
+	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/wk8/go-ordered-map/v2 v2.1.8 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
