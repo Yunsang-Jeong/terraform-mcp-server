@@ -22,7 +22,7 @@ func GetModule(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolR
 	}
 
 	// Optional parameters
-	branch := request.GetString("branch", "")
+	ref := request.GetString("ref", "")
 	subDir := request.GetString("subdir", "")
 
 	// Validate and normalize Git URL
@@ -33,7 +33,7 @@ func GetModule(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolR
 
 	// Create Git source
 	config := source.SourceConfig{
-		Branch: branch,
+		Ref:    ref,
 		SubDir: subDir,
 	}
 	gitSource := source.NewGitSource(gitURL, config)
@@ -48,7 +48,7 @@ func GetModule(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolR
 	defer gitSource.Cleanup()
 
 	// Parse Terraform configuration
-	terraformParser := parser.NewParser(fs)
+	terraformParser := parser.NewParser(fs, parser.Simple)
 	tfConfig, err := terraformParser.ParseTerraformWorkspace(rootPath)
 	if err != nil {
 		return mcp.NewToolResultError(fmt.Sprintf("Error parsing Terraform configuration: %v", err)), nil
@@ -63,7 +63,7 @@ func GetModule(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolR
 	// Create response with module information
 	moduleInfo := map[string]interface{}{
 		"url":    gitURL,
-		"branch": branch,
+		"ref":    ref,
 		"subdir": subDir,
 		"config": json.RawMessage(summary),
 	}
@@ -87,12 +87,12 @@ func normalizeGitURL(rawURL string) (string, error) {
 		}
 		host := strings.TrimPrefix(parts[0], "git@")
 		path := parts[1]
-		
+
 		// Ensure .git suffix for SSH URLs
 		if !strings.HasSuffix(path, ".git") {
 			path = path + ".git"
 		}
-		
+
 		return fmt.Sprintf("https://%s/%s", host, path), nil
 	}
 

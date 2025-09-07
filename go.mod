@@ -3,7 +3,7 @@ module github.com/Yunsang-Jeong/terraform-mcp-server
 go 1.24.1
 
 require (
-	github.com/Yunsang-Jeong/terraform-config-parser v0.0.3
+	github.com/Yunsang-Jeong/terraform-config-parser v0.0.5
 	github.com/charmbracelet/fang v0.4.0
 	github.com/mark3labs/mcp-go v0.39.1
 	github.com/spf13/cobra v1.10.1
@@ -64,8 +64,8 @@ require (
 	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/mod v0.27.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
-	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.28.0 // indirect
 	golang.org/x/tools v0.36.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
